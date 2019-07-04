@@ -1,0 +1,7 @@
+DEBUG = True
+
+# 警告
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+# 密码加密
+SECRET_KEY = '\x88D\xf09\x91\x07\x98\x89\x96\xa0A\xc68\xf9\xecJ:U\x17\xc5V\xbe\x87'

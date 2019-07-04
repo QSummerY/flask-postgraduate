@@ -1,0 +1,124 @@
+{% extends 'admin/index.html' %}
+{% block content %}
+    <section class="content-header">
+        <h1>管理员管理</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 档案管理</a></li>
+            <li class="active">考生档案列表</li>
+        </ol>
+    </section>
+    <section class="content" id="showcontent">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">考生档案列表</h3>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-info">{{ message }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        <div class="box-tools">
+                            <form method="get" action="" class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="key" value="{{ key }}" class="form-control pull-right">
+                                <div class="input-group-btn">
+                                    <input type="submit" class="btn btn-default" value="搜索"><i class="fa fa-search"></i>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <th>考号</th>
+                                <th>姓名</th>
+                                <th>性别</th>
+                                <th>年龄</th>
+                                <th>政治面貌</th>
+                                <th>是否应届</th>
+                                <th>学历</th>
+                                <th>来源</th>
+                                <th>报考类别</th>
+                                <th>报考专业</th>
+                                <th>操作</th>
+                            </tr>
+                            {% for record in records.items %}
+                                <tr>
+                                    <td>{{ record.number }}</td>
+                                    <td>{{ record.name }}</td>
+                                    <td>{{ record.get_gender }}</td>
+{#                                    <td>#}
+{#                                        {% if record.gender == 0 %}#}
+{#                                            男#}
+{#                                        {% else %}#}
+{#                                            女#}
+{#                                        {% endif %}#}
+{#                                    </td>#}
+                                    <td>{{ record.age }}</td>
+                                    <td>
+                                        {% if record.political == 1 %}
+                                            群众
+                                        {% elif record.political == 2 %}
+                                            共青团员
+                                        {% else %}
+                                            中共党员
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if record.is_current == 0 %}
+                                            否
+                                        {% else %}
+                                            是
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if record.education == 0 %}
+                                            本科
+                                        {% else %}
+                                            专科
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ record.origin }}</td>
+                                    <td>{{ record.category }}</td>
+                                    <td>{{ record.major }}</td>
+                                    <td>
+                                        <a href="{{ url_for("admin.record_update", record_id=record.number) }}" class="label label-success">编辑</a>
+                                        &nbsp;
+                                        <a href="{{ url_for('admin.record_delete', record_id=record.number) }}" class="label label-danger">删除</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box-footer clearfix">
+                        <ul class="pagination pagination-sm no-margin pull-right">
+                            <li><a href="?page=1">首页</a></li>
+                            {% if records.has_prev %}
+                                <li><a href="?page={{ records.prev_num }}">上一页</a></li>
+                            {% else %}
+                                <li><a class="disabled">上一页</a></li>
+                            {% endif %}
+                            {% for page in records.iter_pages() %}
+                                {% if page == records.page %}
+                                    <li class="active"><a>{{ page }}</a></li>
+                                {% else %}
+                                    <li><a href="?page={{ page }}">{{ page }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if records.has_next %}
+                                <li><a href="?page={{ records.next_num }}">下一页</a></li>
+                            {% else %}
+                                <li><a class="disabled">下一页</a></li>
+                            {% endif %}
+                            <li><a href="?page={{ records.pages }}">尾页</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

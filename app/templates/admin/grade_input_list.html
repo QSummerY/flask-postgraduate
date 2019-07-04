@@ -1,0 +1,91 @@
+{% extends 'admin/index.html' %}
+{% block content %}
+    <section class="content-header">
+        <h1>管理员管理</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 数据录入</a></li>
+            <li class="active">考生成绩列表</li>
+        </ol>
+    </section>
+    <section class="content" id="showcontent">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <h3 class="box-title">考生成绩列表</h3>
+                            {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-info">{{ message }}</div>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                            <div class="box-tools">
+                                <form method="get" action="" class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="key" value="{{ key }}" class="form-control pull-right">
+                                    <div class="input-group-btn">
+                                        <input type="submit" class="btn btn-default" value="搜索"><i class="fa fa-search"></i>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <tbody>
+                                <tr>
+                                    <th>考号</th>
+                                    <th>姓名</th>
+                                    <th>政治</th>
+                                    <th>外语</th>
+                                    <th>基础科目</th>
+                                    <th>专业基础科目</th>
+                                    <th>专业科目</th>
+                                    <th>操作</th>
+                                </tr>
+                                {% for grade in grades.score_list %}
+                                    <tr>
+                                        <td>{{ grade.number }}</td>
+                                        <td>{{ grade.name }}</td>
+                                        <td>{{ grade.politics }}</td>
+                                        <td>{{ grade.english }}</td>
+                                        <td>{{ grade.basis }}</td>
+                                        <td>{{ grade.profession_basis }}</td>
+                                        <td>{{ grade.profession }}</td>
+                                        <td>
+                                            <a href="{{ url_for("admin.grade_input_add", record_id=grade.number) }}" class="label label-success">录入</a>
+                                            &nbsp;
+                                            <a href="{{ url_for("admin.grade_input_update", record_id=grade.number) }}" class="label label-danger">修改</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    <div class="box-footer clearfix">
+                        <ul class="pagination pagination-sm no-margin pull-right">
+{#                            <li><a href="?page=1">首页</a></li>#}
+{#                            {% if grades.has_prev %}#}
+{#                                <li><a href="?page={{ grades.prev_num }}">上一页</a></li>#}
+{#                            {% else %}#}
+{#                                <li><a class="disabled">上一页</a></li>#}
+{#                            {% endif %}#}
+{#                            {% for page in grades.iter_pages() %}#}
+{#                                {% if page == grades.page %}#}
+{#                                    <li class="active"><a>{{ page }}</a></li>#}
+{#                                {% else %}#}
+{#                                    <li><a href="?page={{ page }}">{{ page }}</a></li>#}
+{#                                {% endif %}#}
+{#                            {% endfor %}#}
+{#                            {% if grades.has_next %}#}
+{#                                <li><a href="?page={{ grades.next_num }}">下一页</a></li>#}
+{#                            {% else %}#}
+{#                                <li><a class="disabled">下一页</a></li>#}
+{#                            {% endif %}#}
+{#                            <li><a href="?page={{ grades.pages }}">尾页</a></li>#}
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}

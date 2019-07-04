@@ -1,0 +1,66 @@
+{% extends 'admin/index.html' %}
+{% block content %}
+    <section class="content-header">
+        <h1>管理员管理</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 数据录入</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> 考生录取列表</a></li>
+            <li class="active">录取信息录入</li>
+        </ol>
+    </section>
+    <section class="content" id="showcontent">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">录取信息录入</h3>
+                        {% if form.errors %}
+                            <div class="alert alert-info">{{ form.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <form role="form" method="post" action="">
+                        <div class="box-body" style="height:600px;">
+                            <div class="row">
+                                <div class="form-group col-md-1"></div>
+                                <div class="form-group col-md-4">
+                                    <label for="input_speed">考号</label>
+                                    {{ form.number }}
+{#                                    <input type="text" class="form-control" id="input_speed" placeholder="考号">#}
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group col-md-4">
+                                    <label for="input_mem">录取院校</label>
+                                    {{ form.unit }}
+{#                                    <input type="text" class="form-control" id="input_mem" placeholder="录取院校">#}
+                                </div>
+                                <div class="form-group col-md-1"></div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-1"></div>
+                                <div class="form-group col-md-4">
+                                    <label for="input_speed">复试科目</label>
+                                    {{ form.re_subject }}
+{#                                    <input type="text" class="form-control" id="input_speed" placeholder="复试科目">#}
+                                </div>
+                                <div class="form-group col-md-2"></div>
+                                <div class="form-group col-md-4">
+                                    <label for="input_mem">复试成绩</label>
+                                    {{ form.re_grade }}
+{#                                    <input type="text" class="form-control" id="input_mem" placeholder="复试成绩">#}
+                                </div>
+                                <div class="form-group col-md-1"></div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-10"></div>
+                                <div class="box-footer col-md-1">
+                                    <button type="submit" class="btn btn-primary">录入</button>
+                                </div>
+                                <div class="form-group col-md-1"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

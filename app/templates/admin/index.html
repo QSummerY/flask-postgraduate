@@ -1,0 +1,92 @@
+{% extends 'base/base.html' %}
+
+{% block logo_title %}
+    <span class="logo-lg">
+{#                <img src="{{ url_for('static', filename='base/images/logo.png') }}"#}
+{#                                       style="height:40px;width:40px;">#}
+        管理员管理
+    </span>
+{% endblock %}
+
+
+{% block content %}
+    <section class="content-header">
+                <h1>管理员管理</h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li class="active">控制面板</li>
+                </ol>
+            </section>
+{% endblock %}
+
+{% block menu %}
+    <ul class="sidebar-menu">
+        <li class="header">管理菜单</li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-home" aria-hidden="true"></i>
+                <span>首页</span>
+                <span class="label label-primary pull-right">1</span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a href="{{ url_for('admin.index') }}">
+                        <i class="fa fa-circle-o"></i> 控制面板
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-tags" aria-hidden="true"></i>
+                <span>档案管理</span>
+                <span class="label label-primary pull-right">1</span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a href="{{ url_for('admin.examinee_record') }}">
+                        <i class="fa fa-circle-o"></i> 考生档案
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-tags" aria-hidden="true"></i>
+                <span>数据录入</span>
+                <span class="label label-primary pull-right">2</span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a href="{{ url_for('admin.grade_input_list') }}">
+                        <i class="fa fa-circle-o"></i> 成绩录入
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('admin.admission_input_list') }}">
+                        <i class="fa fa-circle-o"></i> 录取信息录入
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-file-video-o" aria-hidden="true"></i>
+                <span>数据统计</span>
+                <span class="label label-primary pull-right">2</span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a href="{{ url_for('admin.grade_calculate') }}">
+                        <i class="fa fa-circle-o"></i> 成绩统计
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('admin.admission_calculate') }}">
+                        <i class="fa fa-circle-o"></i> 录取情况统计
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+{% endblock %}

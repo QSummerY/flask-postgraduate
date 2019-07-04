@@ -1,0 +1,140 @@
+{% extends 'admin/index.html' %}
+{% block content %}
+    <section class="content-header">
+        <h1>管理员管理</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 数据统计</a></li>
+            <li class="active">成绩统计</li>
+        </ol>
+    </section>
+    <section class="content" id="showcontent">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">考生成绩统计</h3>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-danger">{{ message }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    <div class="box-tools">
+                                <form method="get" action="" class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="key" value="{{ key }}" class="form-control pull-right">
+                                    <div class="input-group-btn">
+                                        <input type="submit" class="btn btn-default" value="搜索"><i class="fa fa-search"></i>
+                                    </div>
+                                </form>
+                            </div>
+                    </div>
+                    <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <tbody>
+                                <tr>
+                                    <th>考号</th>
+                                    <th>姓名</th>
+                                    <th>总分</th>
+                                    <th>平均分</th>
+                                </tr>
+                                {% for grade in grades %}
+                                    <tr>
+                                        <td>{{ grade.number }}</td>
+                                        <td>{{ grade.name }}</td>
+                                        <td>{{ grade.get_total }}</td>
+                                        <td>{{ grade.get_average }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+            <br>
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">科目成绩统计</h3>
+                    </div>
+                    <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <tbody>
+                                <tr>
+                                    <th>科目</th>
+                                    <th>平均分</th>
+                                    <th>及格率</th>
+                                    <th>不及格率</th>
+                                    <th>不及格</th>
+                                    <th>及格</th>
+                                    <th>中等</th>
+                                    <th>良好</th>
+                                    <th>优秀</th>
+                                </tr>
+{#                                {% for subject in subjects %}#}
+                                    <tr>
+                                        <td>政治</td>
+                                        <td>84.75</td>
+                                        <td>100</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                    </tr>
+{#                                {% endfor %}#}
+                                                                </tr>
+{#                                {% for subject in subjects %}#}
+                                    <tr>
+                                        <td>英语</td>
+                                        <td>71</td>
+                                        <td>50</td>
+                                        <td>50</td>
+                                        <td>2</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>2</td>
+                                    </tr>
+                                                                </tr>
+{#                                {% for subject in subjects %}#}
+                                    <tr>
+                                        <td>基础科目</td>
+                                        <td>80.5</td>
+                                        <td>100</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>2</td>
+                                        <td>0</td>
+                                        <td>2</td>
+                                    </tr>
+                                <tr>
+                                        <td>专业基础科目</td>
+                                        <td>80.75</td>
+                                        <td>100</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td>3</td>
+                                        <td>0</td>
+                                    </tr>
+                                <tr>
+                                        <td>专业科目</td>
+                                        <td>78.5</td>
+                                        <td>75</td>
+                                        <td>25</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>2</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
